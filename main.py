@@ -1,14 +1,14 @@
 import sys
 import random
-from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow, QApplication
 from PyQt5.QtGui import QPainter, QColor
+from UI import Ui_MainWindow
 
 
-class MyWidget(QMainWindow):
+class MyWidget(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
         self.draw = False
         self.pushButton.clicked.connect(self.rounds)
 
@@ -25,7 +25,10 @@ class MyWidget(QMainWindow):
         self.draw = False
 
     def draw_rounds(self, qp):
-        qp.setBrush(QColor(255, 255, 0))
+        r = random.randint(0, 255)
+        g = random.randint(0, 255)
+        b = random.randint(0, 255)
+        qp.setBrush(QColor(r, g, b))
 
         for i in range(3):
             for j in range(3):
